@@ -1,3 +1,3 @@
 export class CreateTaskMessageDTO {
-  value: string;
+  content: string;
 }
