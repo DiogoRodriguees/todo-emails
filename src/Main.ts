@@ -5,7 +5,6 @@ import { AppModule } from './modules/AppModule';
 
 async function Main() {
   const app = await NestFactory.create(AppModule);
-
   app.connectMicroservice<MicroserviceOptions>(MicroServiceConfig);
   app.startAllMicroservices();
 

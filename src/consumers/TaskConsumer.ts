@@ -1,11 +1,14 @@
-import { Controller, Logger } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { CreateTaskMessageDTO } from 'src/classes/dtos/CreateTaskMessageDTO';
+import { MailService } from 'src/services/MailService';
 
 @Controller()
 export class TaskConsumer {
+  constructor(private readonly mailService: MailService) {}
+
   @MessagePattern('CREATE_TASK')
   async consumeCreateTask(message: CreateTaskMessageDTO) {
-    Logger.log(message.content, 'Message Consumer');
+    await this.mailService.sendMailTaskCreated(message);
   }
 }
